@@ -1,0 +1,47 @@
+.BigLogo, .SmallLogo{
+    animation: App-logo-spin infintite 2s linear;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .BigLogo , .SmallLogo{
+      animation: App-logo-spin 2s;
+    }
+  }
+@keyframes App-logo-spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.SmallLogo {
+    transition: transform 0.2s ease-in-out; /* add a transition for a smoother animation */
+  }
+  
+  .SmallLogo:hover {
+    transform: scale(1.08); /* increase the size of the image by 20% on hover */
+  }
+
+  .container-fluid {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 100%;
+  }
+
+
+
+
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  
+}
