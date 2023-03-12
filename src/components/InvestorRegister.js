@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { Routes, Route, Link, useLocation } from "react-router-dom";
 import Form from "react-validation/build/form";
@@ -9,6 +9,7 @@ import { isEmail } from "validator";
 import { investor_register } from "../actions/newAuth";
 import { Box ,Grid ,TextField,Button } from "@mui/material";
 import logo from "./images/logo.png";
+import { clearMessage } from '../actions/message';
 
 const required = (value) => {
   if (!value) {
@@ -70,9 +71,14 @@ const InvestorRegister = () => {
   const [contactNo, setContactNo] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
-
-  const { message } = useSelector(state => state.message);
+  //const [message , setMessage] = useState("");
+   
   const dispatch = useDispatch();
+  const { message } = useSelector(state => state.message);
+  
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
 
   const onChangeFirstName = (e) => {
     const firstName = e.target.value;
