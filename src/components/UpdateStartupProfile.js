@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef , useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { Routes, Route, Link, useLocation } from "react-router-dom";
 import Form from "react-validation/build/form";
@@ -8,6 +8,7 @@ import { isEmail } from "validator";
 //import Login from "./Login";
 import {  startup_update_profile } from "../actions/newAuth";
 import { TextField,Button,Typography } from "@mui/material";
+import { clearMessage } from '../actions/message';
 
 const required = (value) => {
   if (!value) {
@@ -32,8 +33,14 @@ const UpdateInvestorProfile = () => {
   const [successful, setSuccessful] = useState(false);
 
   const { message } = useSelector(state => state.message);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
+
+
+  
   const id = currentUser.id ;
 
   const onChangeCompanyValuation = (e) => {

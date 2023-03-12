@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { Routes, Route, Link, useLocation } from "react-router-dom";
 import Form from "react-validation/build/form";
@@ -12,6 +12,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import logo from "./images/logo.png";
+import { clearMessage } from '../actions/message';
 
 const StartupRegister = () => {
   const form = useRef();
@@ -30,6 +31,11 @@ const StartupRegister = () => {
 
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
+
 
   const onChangeUserName = (e) => {
     const userName = e.target.value;

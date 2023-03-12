@@ -75,7 +75,7 @@ const LandingPage = (props) => {
                 </div>
             <footer class="mt-auto h-20 w-100 justify-content-center" style={{ background: "#cec2e3",position : "fixed",left : "0px",bottom : "0px",width:"100%",margin:"0px",height : "70px" }} >
                 <center>
-                    Get Your First Equity Free . Limitations Apply .
+                    Get Your First Equity Free*. Limitations Apply* .
                     <br></br>
                     Rights  Reserved
                 </center>

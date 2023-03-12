@@ -328,7 +328,6 @@ const App = () => {
                   ) : (<>
                     <Button color="secondary">Invest</Button>
                     <Button color="secondary">About</Button>
-                    <Button color="secondary">Learn</Button>
                     <Button color="secondary">Support</Button>
                     <Button variant="contained" color="secondary" size="small" onClick={handleProfileMenuOpen}>Login</Button>
                     <Button variant="contained" color="secondary" size="small">
@@ -359,7 +358,7 @@ const App = () => {
 
           <div >
             <Routes>
-              <Route path="/" element={<LandingPage />} />
+              <Route path="/" element={showInvestorBoard ? <InvestorDashboard /> : showStartupBoard ? <StartupDashboard /> : <LandingPage />} />
               <Route path="/userdashboard" element={<UserDashboard />} />
               <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef , useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 //import { Routes, Route, Link, useLocation } from "react-router-dom";
@@ -11,6 +11,7 @@ import LandingPage from "./LandingPage";
 import { Box, Grid, TextField, Button } from "@mui/material";
 //here login function is imported
 import logo from "./images/logo.png";
+import { clearMessage } from '../actions/message';
 
 const required = (value) => {
   if (!value) {
@@ -36,6 +37,10 @@ const StartupLogin = (props) => {
   const { message } = useSelector((state) => state.message);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
 
   const onChangeuserName = (e) => {
     const userName = e.target.value;
