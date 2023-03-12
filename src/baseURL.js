@@ -1,3 +1,3 @@
-const baseURL = "http://localhost:8080/" ;
+const baseURL = "https://now-acquire-backend.vercel.app/" ;
 
 export default baseURL;
