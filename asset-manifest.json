@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/now-acquire/static/css/main.5db4af03.css",
+    "main.js": "/now-acquire/static/js/main.7028a226.js",
+    "static/media/graph.png": "/now-acquire/static/media/graph.906e0123556a5ea2c58d.png",
+    "static/media/logo.png": "/now-acquire/static/media/logo.c6fd079be3cc19bd7464.png",
+    "index.html": "/now-acquire/index.html",
+    "main.5db4af03.css.map": "/now-acquire/static/css/main.5db4af03.css.map",
+    "main.7028a226.js.map": "/now-acquire/static/js/main.7028a226.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5db4af03.css",
+    "static/js/main.7028a226.js"
+  ]
+}
