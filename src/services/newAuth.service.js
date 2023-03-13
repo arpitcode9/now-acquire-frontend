@@ -7,6 +7,10 @@ const investor_register = (firstName, lastName, userName, email, password, conta
   return axios.post(API_URL + "investor/signup", {
     firstName, lastName, userName, email, password, contactNo,
     //check order of these elements if it is necessary to be in an order
+  }, {
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
   });
 };
 
@@ -14,6 +18,10 @@ const investor_update_profile = (aadharNo, panNo , address , id ) => {
   return axios.post(API_URL + "investor/updateProfile/" + id , {
     aadharNo , panNo , address 
     //check order of these elements if it is necessary to be in an order
+  },{
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
   });
 };
 
@@ -22,7 +30,11 @@ const investor_login = (userName, password) => {
     .post(API_URL + "investor/signin", {
       userName,
       password,
-    })
+    }, {
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
     .then((response) => {
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -36,6 +48,10 @@ const startup_register = (name, userName, password, registrationNo, email, conta
   return axios.post(API_URL + "startup/signup", {
     name, userName, password, registrationNo, email, contactNo, address, industry, dateOfIncorp,
     //check order of these elements if it is necessary to be in an order
+  }, {
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
   });
 };
 
@@ -44,7 +60,11 @@ const startup_login = (userName, password) => {
     .post(API_URL + "startup/signin", {
       userName,
       password,
-    })
+    }, {
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
     .then((response) => {
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -58,6 +78,10 @@ const startup_update_profile = (companyValuation, promoterStake, angelStake, ins
   return axios.post(API_URL + "startup/updateProfile/" + id , {
     financials : { companyValuation, promoterStake, angelStake, institutionalStake, equityOnNA,equityAvailableOnNA,equitySoldOnNA,},
     //check order of these elements if it is necessary to be in an order
+  }, {
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
   });
 };
 
