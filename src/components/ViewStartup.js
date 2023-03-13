@@ -200,21 +200,21 @@ const ViewStartup = () => {
           <TextField
             autoFocus
             margin="dense"
-            value={amount}
-            id="Amount in Rupees"
-            label="Amount in Rupees"
-            type="text"
-            readOnly
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin="dense"
             value={percentage}
             onChange = {handlePercentage}
             id="flat"
             label="Percentage Of Equity"
             type="text"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            value={amount}
+            id="Amount in Rupees"
+            label="Amount in Rupees"
+            type="text"
+            readOnly
             fullWidth
           />
         </DialogContent>
