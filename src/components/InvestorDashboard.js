@@ -13,6 +13,7 @@ import { CategoryScale } from "chart.js";
 import { Data } from "./utils/data";
 import { Line } from "react-chartjs-2";
 import baseURL from '../baseURL';
+import { ContactSupportOutlined } from '@mui/icons-material';
 
 Chart.register(CategoryScale);
 
@@ -119,6 +120,7 @@ const InvestorDashboard = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
   const userID = currentUser.id;
   const [thisUser, setThisUser] = useState([]);
+  const [graphData,setGraphData] = useState([]);
   const [chartData, setChartData] = useState({
     labels: Data.map((data) => data.month), 
     datasets: [
@@ -138,7 +140,8 @@ const InvestorDashboard = () => {
     ]
   });
 
-  useEffect(() => {
+  useEffect(() => {  
+    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]; 
     const fetchData = async () => {
       try {
         const response = await axios.get(baseURL+'investor/getProfile/' + userID, {
@@ -148,6 +151,10 @@ const InvestorDashboard = () => {
         });
         setThisUser(response.data);
         let finalObj = []
+        let monthWiseData = {}
+        month.forEach(m => {
+          monthWiseData[m] = 0
+        })
         response.data.financials.investments.companies.forEach((company , i)=>{
           let object = {
             "id" : company._id,
@@ -162,9 +169,52 @@ const InvestorDashboard = () => {
             "percentage" : company.equityOwned,
             "value" : company.currMarketValue
           }
+          company.transactions.forEach(item=>{
+            var d = new Date(item.date)
+            // if( new Date().getMilliseconds() - d.getMilliseconds() > 2*15778800000){
+            //   return
+            // }
+            var mo = month[d.getMonth()]
+            if(mo){
+                if(item.buy){
+                  monthWiseData[mo] += parseInt(item.amount)
+                }
+                else{
+                  monthWiseData[mo] -= parseInt(item.amount)
+                }
+            }
+          })
+          let id = 1
+          const result = Object.keys(monthWiseData).map(item => {
+            return{
+              "id" : id++,
+              "portfolioValue" : monthWiseData[item],
+              "month" : item
+            }
+          })
+          setGraphData(result)
+          setChartData({
+            labels: result.map((data) => data.month), 
+            datasets: [
+              {
+                label: "Your Portfolio",
+                data: result.map((data) => data.portfolioValue),
+                backgroundColor: [
+                  "rgba(75,192,192,1)",
+                  "#ecf0f1",
+                  "#50AF95",
+                  "#f3ba2f",
+                  "#2a71d0"
+                ],
+                borderColor: "black",
+                borderWidth: 2
+              }
+            ]
+          })
           finalObj.push(object)
         })
         setPortfolioData(finalObj);
+        
       } catch (error) {
         console.error(error);
       }
@@ -193,7 +243,7 @@ const InvestorDashboard = () => {
   
 
 
-function LineChart({ chartData }) {
+function LineChart({ graphData }) {
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: "center" }}>Line Chart</h2>
@@ -349,14 +399,6 @@ function LineChart({ chartData }) {
         <div className='row-1'>
           <Typography variant="h4" gutterBottom>
             Welcome to your Dashboard <strong>{fname + space + lname + space + "!"}</strong>
-            {/* {currentUser.user1._doc.financials.investments.companies[1].name} */}
-            {/* {getObjects()} */}
-            {/* { currentUser.user1._doc.financials.investments.companies.map( 
-              (company) => {
-              <div className={classes.recommendationCard} key={company.name}>
-                <Typography>{company.name}</Typography>
-              </div>
-            })} */}
           </Typography>
         </div>
         <div className='row-8 d-flex'>
@@ -365,8 +407,6 @@ function LineChart({ chartData }) {
           <Line
         data={chartData}
         options={{
-          // responsive: true,
-          // maintainAspectRatio: false,
           plugins: {
             title: {
               display: true,
@@ -397,9 +437,3 @@ function LineChart({ chartData }) {
 };
 
 export default InvestorDashboard;
-
-{/* your investments : {currentUser.user1._doc.financials.investments.companies.map((company)=>(
-          <div className={classes.recommendationCard} key={company.id}>
-          <Typography>{company.name}</Typography>
-        </div>
-        ))} */}

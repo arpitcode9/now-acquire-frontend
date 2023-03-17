@@ -120,6 +120,9 @@ const App = () => {
 
   const logOut = useCallback(() => {
     dispatch(logout());
+    setTimeout(() => {
+      document.location.reload();
+    }, 500);
   }, [dispatch]);
 
   useEffect(() => {
@@ -271,13 +274,6 @@ const App = () => {
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
                 <Stack direction="row" spacing={2}>
-{/* 
-                  <Button color="secondary">
-                    <Link to={"/TestPage"}>
-                      TestPage
-                    </Link>
-                  </Button> */}
-
                   {showStartupBoard && (
                     <>
                       <Button color="secondary">
@@ -379,7 +375,6 @@ const App = () => {
               <Route path="/UpdateStartupProfile" element={<UpdateStartupProfile />} />
               <Route path="/StartupProfile" element={<StartupProfile />} />
               <Route path="/InvestorProfile" element={<InvestorProfile />} />
-              <Route path="/TestPage" element={<TestPage/>} />
 
             </Routes>
           </div>
