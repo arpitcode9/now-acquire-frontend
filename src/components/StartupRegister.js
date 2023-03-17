@@ -255,6 +255,7 @@ const StartupRegister = () => {
                     <Button variant="contained" color="secondary" type="submit">
                       Sign Up
                     </Button>
+                    This is still a mock site 
                   </div>
                 )}
 
