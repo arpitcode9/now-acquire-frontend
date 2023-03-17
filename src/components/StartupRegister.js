@@ -13,6 +13,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import logo from "./images/logo.png";
 import { clearMessage } from '../actions/message';
+import Typography from '@mui/material/Typography';
 
 const StartupRegister = () => {
   const form = useRef();
@@ -120,6 +121,11 @@ const StartupRegister = () => {
           />
         </Grid>
         <Grid item xs={6}>
+        <Typography
+                    color="red"
+                    >
+                      This site is not yet into Live Production . This is a beta version mock up of the Actual NowAcquire Website.
+                    </Typography>
           <div style={{ paddingRight: "20%" }}>
             <h4 style={{ textAlign: "center", marginBottom: "20px" }}>Startup Register</h4>
             <div>
@@ -252,10 +258,14 @@ const StartupRegister = () => {
                         </LocalizationProvider>
                       </div>
                     </div>
+                    <p>
                     <Button variant="contained" color="secondary" type="submit">
                       Sign Up
                     </Button>
-                    This is still a mock site 
+                    
+                    </p>
+                    
+
                   </div>
                 )}
 
