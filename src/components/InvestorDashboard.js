@@ -404,9 +404,10 @@ function LineChart({ graphData }) {
         <div className='row-8 d-flex'>
           <div className='col-5 ' style={{flexDirection : "column"}}>
           <h5>Your Portfolio Graph</h5>
-          <Line
+          {/* <Line
         data={chartData}
         options={{
+          
           plugins: {
             title: {
               display: true,
@@ -417,7 +418,26 @@ function LineChart({ graphData }) {
             }
           }
         }}
-      />
+      /> */}
+      <Line
+  data={chartData}
+  options={{
+    plugins: {
+      title: {
+        display: true,
+        text: "Your Portfolio Graph"
+      },
+      legend: {
+        display: false
+      }
+    },
+    scales: {
+      y: {
+        min: 0
+      }
+    }
+  }}
+/>
           </div>
           <div className='col-7'>
             {renderPortfolioTable()}
