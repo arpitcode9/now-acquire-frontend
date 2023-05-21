@@ -7,9 +7,10 @@ import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 //import Login from "./Login";
 import { investor_register } from "../actions/newAuth";
-import { Box ,Grid ,TextField,Button } from "@mui/material";
+import { Box, Grid, TextField, Button } from "@mui/material";
 import logo from "./images/logo.png";
 import { clearMessage } from '../actions/message';
+import TermsAndConditions from "./TermsAndConditions";
 
 const required = (value) => {
   if (!value) {
@@ -72,10 +73,11 @@ const InvestorRegister = () => {
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   //const [message , setMessage] = useState("");
-   
+  const [isOpen, setIsOpen] = useState(false);
+  const [isTncMarked, setTncMarked] = useState(false);
   const dispatch = useDispatch();
   const { message } = useSelector(state => state.message);
-  
+
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
@@ -114,7 +116,7 @@ const InvestorRegister = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(investor_register(firstName , lastName , username, email, password , contactNo))
+      dispatch(investor_register(firstName, lastName, username, email, password, contactNo))
         .then(() => {
           setSuccessful(true);
         })
@@ -122,6 +124,15 @@ const InvestorRegister = () => {
           setSuccessful(false);
         });
     }
+  };
+  const handleOpenDialog = () => {
+    setIsOpen(true);
+  };
+  const handleCloseDialog = () => {
+    setIsOpen(false);
+  };
+  const handleTncMarked = (event) => {
+    setTncMarked(!isTncMarked);
   };
 
   return (
@@ -136,8 +147,8 @@ const InvestorRegister = () => {
           />
         </Grid>
         <Grid item xs={6}>
-          <div style={{ paddingRight: "20%",paddingTop : "8%"}}>
-            <h4 style={{textAlign : "center",marginBottom : "20px"}}>Investor Register</h4>
+          <div style={{ paddingRight: "20%", paddingTop: "8%" }}>
+            <h4 style={{ textAlign: "center", marginBottom: "20px" }}>Investor Register</h4>
             <div>
               <Form onSubmit={handleRegister} ref={form}>
                 {!successful && (
@@ -197,7 +208,7 @@ const InvestorRegister = () => {
                       />
                     </div>
                     <div style={{ marginBottom: "20px" }}>
-                    <TextField
+                      <TextField
                         value={username}
                         name="username"
                         onChange={onChangeUsername}
@@ -222,7 +233,15 @@ const InvestorRegister = () => {
                         required
                       />
                     </div>
-                    <Button variant="contained" color="secondary" type="submit" style={{width : "80%",marginLeft : "10%"}}>
+                    <label>
+                      <input type="checkbox" onChange={handleTncMarked} value={isTncMarked} />
+                      I agree to the{' '}
+                      <a href="#" onClick={handleOpenDialog}>
+                        Terms and Conditions
+                      </a>
+                    </label>
+                    <TermsAndConditions isOpen={isOpen} handleCloseDialog={()=>handleCloseDialog()}/>
+                    <Button  disabled={!isTncMarked} variant="contained" color="secondary" type="submit" style={{ width: "80%", marginLeft: "10%" }}>
                       Sign Up As An Investor
                     </Button>
                   </div>

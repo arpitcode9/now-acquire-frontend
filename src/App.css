@@ -55,3 +55,9 @@ label {
 .SmallLogo:hover {
   transform: scale(1.08); /* increase the size of the image by 20% on hover */
 }
+.dialog-content {
+  padding-left: 20px;
+  padding-top: 20px;
+  max-height: 500px; /* Set a maximum height to enable vertical scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
