@@ -61,3 +61,19 @@ label {
   max-height: 500px; /* Set a maximum height to enable vertical scrolling */
   overflow-y: auto; /* Enable vertical scrolling */
 }
+
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}

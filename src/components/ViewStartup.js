@@ -13,6 +13,7 @@ import SnackBar from "@material-ui/core/Snackbar";
 import { SnackbarContent } from "@mui/material";
 import baseURL from "../baseURL";
 import { TableContainer,Table,TableBody,TableRow,TableCell,Paper } from "@material-ui/core";
+import YoutubeEmbed from "./YoutubeEmbed";
 
 const ViewStartup = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -133,6 +134,8 @@ const ViewStartup = () => {
           <h5>
             Financials
           </h5>
+          <YoutubeEmbed embedId="rokGy0huYEA" />
+
           <TableContainer component={Paper}>
             <Table>
               <TableBody>
