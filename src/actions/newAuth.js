@@ -123,8 +123,8 @@ import NewAuthService from "../services/newAuth.service";
     );
   };
 
-  export const startup_register = (name , userName,  password ,registrationNo,email,contactNo , address , industry , dateOfIncorp) => (dispatch) => {
-    return NewAuthService.startup_register(name , userName,  password ,registrationNo,email,contactNo , address , industry , dateOfIncorp).then(
+  export const startup_register = (name , userName,  password ,registrationNo,email,contactNo , address , industry , dateOfIncorp , modeOfReach,agentName,videoLink) => (dispatch) => {
+    return NewAuthService.startup_register(name , userName,  password ,registrationNo,email,contactNo , address , industry , dateOfIncorp , modeOfReach,agentName,videoLink).then(
       (response) => {
         dispatch({
           type: STARTUP_REGISTER_SUCCESS,

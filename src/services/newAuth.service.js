@@ -44,9 +44,9 @@ const investor_login = (userName, password) => {
     });
 };
 
-const startup_register = (name, userName, password, registrationNo, email, contactNo, address, industry, dateOfIncorp) => {
+const startup_register = (name, userName, password, registrationNo, email, contactNo, address, industry, dateOfIncorp , modeOfReach,agentName,videoLink,) => {
   return axios.post(API_URL + "startup/signup", {
-    name, userName, password, registrationNo, email, contactNo, address, industry, dateOfIncorp,
+    name, userName, password, registrationNo, email, contactNo, address, industry, dateOfIncorp,modeOfReach,agentName,videoLink,
     //check order of these elements if it is necessary to be in an order
   }, {
     headers: {

@@ -13,6 +13,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import logo from "./images/logo.png";
 import { clearMessage } from '../actions/message';
+import TermsAndConditions from "./TermsAndConditions";
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const StartupRegister = () => {
   const form = useRef();
@@ -27,7 +34,12 @@ const StartupRegister = () => {
   const [registrationNo, setRegistratonNo] = useState("");
   const [name, setName] = useState("");
   const [industry, setIndustry] = useState("");
+  const [modeOfReach, setModeOfReach] = useState("");
+  const [agentName, setAgentName] = useState("");
+  const [videoLink, setVideoLink] = useState("");
   const [successful, setSuccessful] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isTncMarked, setTncMarked] = useState(false);
 
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
@@ -76,6 +88,27 @@ const StartupRegister = () => {
     const industry = e.target.value;
     setIndustry(industry);
   };
+  const onChangeModeOfReach = (e) => {
+    const modeOfReach = e.target.value;
+    setModeOfReach(modeOfReach);
+  };
+  const onChangeAgentName = (e) => {
+    const agentName = e.target.value;
+    setAgentName(agentName);
+  };
+  const onChangeVideoLink = (e) => {
+    const videoLink = e.target.value;
+    setVideoLink(videoLink);
+  };
+  const handleOpenDialog = () => {
+    setIsOpen(true);
+  };
+  const handleCloseDialog = () => {
+    setIsOpen(false);
+  };
+  const handleTncMarked = (event) => {
+    setTncMarked(!isTncMarked);
+  };
 
   const handleRegister = (e) => {
     console.log("I am Called");
@@ -96,7 +129,10 @@ const StartupRegister = () => {
           contactNo,
           address,
           industry,
-          dateOfIncorp
+          dateOfIncorp,
+          modeOfReach,
+          agentName,
+          videoLink,
         )
       )
         .then(() => {
@@ -107,6 +143,7 @@ const StartupRegister = () => {
         });
     }
   };
+  // console.log(videoLink , modeOfReach , agentName);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -158,21 +195,19 @@ const StartupRegister = () => {
                         name="email"
                         onChange={onChangeEmail}
                         type={"email"}
-                        sx={{ width: "100%" }}
+                        sx={{ marginRight: "6%", width: "47%" }}
                         id="outlined-basic"
                         label="Email Address"
                         variant="outlined"
                         color="secondary"
                         required
                       />
-                    </div>
-                    <div style={{ marginBottom: "20px" }}>
                       <TextField
                         value={password}
                         name="password"
                         onChange={onChangePassword}
                         type={"password"}
-                        sx={{ width: "100%" }}
+                        sx={{ width: "47%" }}
                         id="outlined-basic"
                         label="Password"
                         variant="outlined"
@@ -220,6 +255,20 @@ const StartupRegister = () => {
                         required
                       />
                     </div>
+                    <div style={{ marginBottom: "20px" }}>
+                      <TextField
+                        value={videoLink}
+                        name="videoLink"
+                        onChange={onChangeVideoLink}
+                        type={"text"}
+                        sx={{ width: "100%" }}
+                        id="outlined-basic"
+                        label="Video Link"
+                        variant="outlined"
+                        color="secondary"
+                        required
+                      />
+                    </div>
                     <div style={{ marginBottom: "20px", flexDirection: "row", display: "flex" }}>
                       <TextField
                         value={industry}
@@ -252,10 +301,67 @@ const StartupRegister = () => {
                         </LocalizationProvider>
                       </div>
                     </div>
-                    <Button variant="contained" color="secondary" type="submit">
-                      Sign Up
+                    <div style={{ marginBottom: "20px", flexDirection: "row", display: "flex" }}>
+                      {/* <TextField
+                        value={modeOfReach}
+                        name="modeOfReach"
+                        onChange={onChangeModeOfReach}
+                        type={"text"}
+                        sx={{ marginRight: "6%", width: "47%" }}
+                        id="outlined-basic"
+                        label="How did you know about NowAcquire ?"
+                        variant="outlined"
+                        color="secondary"
+                        required
+                      /> */}
+                      <FormControl sx={{ marginRight: "6%", width: "67%" }}>
+                        <InputLabel id="demo-simple-select-helper-label">How did you know about NowAcquire ?</InputLabel>
+                        <Select
+                          value={modeOfReach}
+                          name="modeOfReach"
+                          onChange={onChangeModeOfReach}
+                          
+                          id="outlined-basic"
+                          label="How did you know about NowAcquire ?"
+                          variant="outlined"
+                          color="secondary"
+                          required
+                        >
+                          <MenuItem value="website">Website</MenuItem>
+                          <MenuItem value="social-media">Social Media</MenuItem>
+                          <MenuItem value="conferences">Conferences</MenuItem>
+                          <MenuItem value="newspaper">Newspaper</MenuItem>
+                          <MenuItem value="now-acquire-agent">Now Acquire Agent</MenuItem>
+                        </Select>
+                        {/* <FormHelperText>How did you get to know about Now Acquire ?</FormHelperText> */}
+                      </FormControl>
+
+                      <div>
+                        <TextField
+                          value={agentName}
+                          name="agentName"
+                          onChange={onChangeAgentName}
+                          type={"text"}
+                          sx={{ width: "100%" }}
+                          id="outlined-basic"
+                          label="Agent Name"
+                          variant="outlined"
+                          color="secondary"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <label>
+                      <input type="checkbox" onChange={handleTncMarked} value={isTncMarked} />
+                      I agree to the{' '}
+                      <a href="#" onClick={handleOpenDialog}>
+                        Terms and Conditions
+                      </a>
+                    </label>
+                    <TermsAndConditions isOpen={isOpen} handleCloseDialog={() => handleCloseDialog()} />
+                    <Button disabled={!isTncMarked} variant="contained" color="secondary" type="submit" style={{ width: "80%", marginLeft: "10%" , marginBottom: "20px"}}>
+                      Sign Up Your Startup
                     </Button>
-                    This is still a mock site 
                   </div>
                 )}
 
