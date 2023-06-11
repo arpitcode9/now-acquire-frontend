@@ -134,8 +134,7 @@ const ViewStartup = () => {
           <h5>
             Financials
           </h5>
-          <YoutubeEmbed embedId="rokGy0huYEA" />
-
+          <YoutubeEmbed videoLink1={thisStartup.videoLink} />
           <TableContainer component={Paper}>
             <Table>
               <TableBody>
