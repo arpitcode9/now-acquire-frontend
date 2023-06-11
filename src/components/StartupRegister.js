@@ -40,6 +40,7 @@ const StartupRegister = () => {
   const [successful, setSuccessful] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isTncMarked, setTncMarked] = useState(false);
+  const [isAgentName, setShowAgentName ] = useState(false);
 
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
@@ -90,6 +91,13 @@ const StartupRegister = () => {
   };
   const onChangeModeOfReach = (e) => {
     const modeOfReach = e.target.value;
+    if(e.target.value === "now-acquire-agent"){
+      setShowAgentName(true)
+    }
+    else{
+      setShowAgentName(false)
+      setAgentName("")
+    }
     setModeOfReach(modeOfReach);
   };
   const onChangeAgentName = (e) => {
@@ -302,18 +310,6 @@ const StartupRegister = () => {
                       </div>
                     </div>
                     <div style={{ marginBottom: "20px", flexDirection: "row", display: "flex" }}>
-                      {/* <TextField
-                        value={modeOfReach}
-                        name="modeOfReach"
-                        onChange={onChangeModeOfReach}
-                        type={"text"}
-                        sx={{ marginRight: "6%", width: "47%" }}
-                        id="outlined-basic"
-                        label="How did you know about NowAcquire ?"
-                        variant="outlined"
-                        color="secondary"
-                        required
-                      /> */}
                       <FormControl sx={{ marginRight: "6%", width: "67%" }}>
                         <InputLabel id="demo-simple-select-helper-label">How did you know about NowAcquire ?</InputLabel>
                         <Select
@@ -333,7 +329,6 @@ const StartupRegister = () => {
                           <MenuItem value="newspaper">Newspaper</MenuItem>
                           <MenuItem value="now-acquire-agent">Now Acquire Agent</MenuItem>
                         </Select>
-                        {/* <FormHelperText>How did you get to know about Now Acquire ?</FormHelperText> */}
                       </FormControl>
 
                       <div>
@@ -347,7 +342,7 @@ const StartupRegister = () => {
                           label="Agent Name"
                           variant="outlined"
                           color="secondary"
-                          required
+                          hidden={!isAgentName}
                         />
                       </div>
                     </div>
